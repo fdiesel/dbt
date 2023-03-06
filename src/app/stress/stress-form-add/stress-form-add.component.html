@@ -1,0 +1,38 @@
+<div class="p-3 text-center">
+  <h1 class="mb-0">Add Stress Level</h1>
+</div>
+<ul class="list-group list-group-flush border-top border-bottom">
+  <li class="list-group-item">
+    <div class="row">
+      <div class="col-4">
+        <label class="col-form-label">Date</label>
+      </div>
+      <div class="col-8">
+        <input type="datetime-local" class="form-control border-0" [(ngModel)]="date">
+      </div>
+    </div>
+  </li>
+<!--  <li class="list-group-item">-->
+<!--    <div class="row">-->
+<!--      <div class="col-4">-->
+<!--        <label class="col-form-label">Time</label>-->
+<!--      </div>-->
+<!--      <div class="col-8">-->
+<!--        <input type="time" class="form-control border-0" [(ngModel)]="time">-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </li>-->
+  <li class="list-group-item">
+    <div class="row">
+      <div class="col-4">
+        <label class="col-form-label">Stress Level</label>
+      </div>
+      <div class="col-8">
+        <input type="number" class="form-control border-0" min="0" max="100" step="10" [(ngModel)]="level">
+      </div>
+    </div>
+  </li>
+</ul>
+<div class="d-grid p-3">
+  <button class="btn btn-primary" (click)="save()">Save</button>
+</div>

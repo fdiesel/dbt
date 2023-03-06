@@ -1,0 +1,29 @@
+<div class="container-fluid py-2 text-end">
+  <button class="btn btn-success" (click)="showAdd$.next(true)">Add</button>
+</div>
+<ul class="list-group list-group-flush">
+  <li class="list-group-item p-0" *ngFor="let item of stress">
+    <div class="row">
+      <div class="col">
+        <div class="px-3 py-2 font-monospace">
+          {{ item.date | date:'HH:mm' }}
+        </div>
+      </div>
+      <div class="col">
+        <div class="px-3 py-2">
+          {{ item.level }}
+        </div>
+      </div>
+      <div class="col-auto">
+        <div class="h-100 pe-3">
+          <button type="button" class="btn btn-fill" (click)="removeStressLevel(item)">
+            <i class="bi bi-trash"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </li>
+</ul>
+<app-pop-up-card [show$]="showAdd$">
+  <app-stress-form-add (onSave)="addStressLevel($event)"></app-stress-form-add>
+</app-pop-up-card>

@@ -1,0 +1,28 @@
+.pop-up-bg
+  position: fixed
+  z-index: 2000
+  left: 0
+  right: 0
+  top: 0
+  bottom: 0
+  backdrop-filter: blur(10px)
+  -webkit-backdrop-filter: blur(10px)
+  background-color: rgba(0, 0, 0, .1)
+  display: none
+  &.show
+    display: flex
+
+.pop-up
+  z-index: 2000
+  width: 100%
+  max-width: 600px
+  padding-bottom: 3rem
+  left: 50%
+  transform: translate(-50%, 100%)
+  transition: transform 400ms ease
+  &.show
+    transform: translate(-50%, 0)
+
+.content
+  max-height: calc(100vh - 4rem)
+  overflow-y: auto

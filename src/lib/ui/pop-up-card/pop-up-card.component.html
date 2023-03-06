@@ -1,0 +1,11 @@
+<div class='pop-up-bg' [class.show]='show$ | async'></div>
+<div class='pop-up position-fixed bottom-0 px-1' [class.show]='show$ | async'>
+  <div class='card content' *ngIf="renderContent$ | async">
+    <ng-content></ng-content>
+    <div class='d-grid mt-1' *ngIf='showCancel'>
+      <button class='btn btn-dark' (click)='hide()'>
+        <i class='bi bi-chevron-down'></i>
+      </button>
+    </div>
+  </div>
+</div>
