@@ -1,0 +1,19 @@
+<div class="container-fluid">
+  <a class="navbar-brand" href="#">
+    <ng-content select="[brand]"></ng-content>
+  </a>
+  <button class="navbar-toggler pe-1 border-0"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <ng-content select="[nav-link]"></ng-content>
+    </ul>
+  </div>
+</div>

@@ -2,8 +2,16 @@
 @import "~bootstrap-icons/font/bootstrap-icons.css"
 @import "../node_modules/bootstrap/scss/bootstrap"
 
-body
+html, body, app-root
+  height: 100%
   overflow-x: hidden
+
+app-root
+  display: flex
+  flex-direction: column
+
+main
+  flex-grow: 1
 
 .btn-fill
   width: 100%

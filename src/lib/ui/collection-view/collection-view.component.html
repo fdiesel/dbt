@@ -1,0 +1,23 @@
+<app-dynamic-sidebar-view>
+  <div sidebar class='h-100' [appDesktopClassList]='["border-end"]'>
+    <div class='card bg-transparent border-0 scroll-container'>
+      <div class='card-header bg-transparent'>
+        <input class='form-control input-search' [ngModel]='query$ | async' (ngModelChange)='query$?.next($event)'>
+      </div>
+      <div class='scroll'>
+        <ng-content select='[list]'></ng-content>
+      </div>
+    </div>
+  </div>
+  <div content class='scroll-container'>
+    <app-nav-back *appMobileOnly></app-nav-back>
+    <div class='container-lg p-0 p-lg-4 scroll'>
+      <ng-content select='[selected]'></ng-content>
+    </div>
+  </div>
+  <div preview class='scroll-container'>
+    <div class='container-lg p-0 p-lg-4 scroll'>
+      <ng-content select='[preview]'></ng-content>
+    </div>
+  </div>
+</app-dynamic-sidebar-view>

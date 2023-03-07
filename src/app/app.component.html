@@ -1,19 +1,13 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">
+<header>
+  <nav app-navbar class="navbar-dark bg-dark">
+    <div brand>
       <i class="bi bi-file-medical me-2"></i>
       <span>DBT</span>
-    </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" routerLink="stress" routerLinkActive="active">Stress</a>
-        </li>
-      </ul>
     </div>
-  </div>
-</nav>
-<router-outlet></router-outlet>
+    <app-nav-link nav-link link="stress">Stress</app-nav-link>
+  </nav>
+</header>
+<main>
+  <app-update-prompt></app-update-prompt>
+  <router-outlet></router-outlet>
+</main>

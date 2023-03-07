@@ -1,0 +1,15 @@
+<div class='accordion accordion-flush'
+     [id]='"accordion-" + accordionId'
+     *appMobileOnly>
+  <ng-container *ngTemplateOutlet='content'></ng-container>
+</div>
+
+<div class='row'
+     [class]='rowClassList'
+     *appDesktopOnly>
+  <ng-container *ngTemplateOutlet='content'></ng-container>
+</div>
+
+<ng-template #content>
+  <ng-content></ng-content>
+</ng-template>
