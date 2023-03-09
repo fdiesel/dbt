@@ -29,7 +29,7 @@ export class StressDataService {
     const key = entry.date.substring(0, 10);
     const currentValue: StressLevelEntry[] = this.storage.get(Table.STRESS, key) || [];
     currentValue.push(entry);
-    currentValue.sort((a: StressLevelEntry, b: StressLevelEntry) => a.date < b.date ? 1 : -1);
+    currentValue.sort((a: StressLevelEntry, b: StressLevelEntry) => a.date.localeCompare(b.date));
     this.storage.set(Table.STRESS, key, currentValue);
     this.update(this.isoDate.getValue());
   }
