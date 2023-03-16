@@ -1,12 +1,12 @@
-import { Directive, ElementRef, Input, OnDestroy, OnInit, Renderer2 } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { BootstrapBreakpointService } from '../bootstrap-breakpoint.service';
+import {Directive, ElementRef, Input, OnDestroy, OnInit, Renderer2} from '@angular/core';
+import {Subscription} from 'rxjs';
+import {BreakpointService} from "ngx-breakpoints";
 
 @Directive({
   selector: '[appAccordionItem]'
 })
 export class AccordionItemDirective implements OnInit, OnDestroy {
-  constructor(private element: ElementRef, private renderer: Renderer2, private breakpointService: BootstrapBreakpointService) {
+  constructor(private element: ElementRef, private renderer: Renderer2, private breakpoints: BreakpointService) {
   }
 
   @Input()
@@ -15,14 +15,14 @@ export class AccordionItemDirective implements OnInit, OnDestroy {
   @Input()
   dataBsParent?: string;
 
-  breakpoint$$?: Subscription;
+  breakpoints$$?: Subscription;
 
   ngOnInit(): void {
     this.renderer.setAttribute(this.element.nativeElement, 'id', `collapse-${this.appAccordionItem}`);
     if (this.dataBsParent) {
       this.renderer.setAttribute(this.element.nativeElement, 'data-bs-parent', `#${this.dataBsParent}`);
     }
-    this.breakpoint$$ = this.breakpointService.observeLower('lg').subscribe((isMobileView) => {
+    this.breakpoints$$ = this.breakpoints.observeMobileView().subscribe((isMobileView) => {
       if (isMobileView) {
         this.renderer.addClass(this.element.nativeElement, 'collapse');
       } else {
@@ -32,6 +32,6 @@ export class AccordionItemDirective implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.breakpoint$$?.unsubscribe();
+    this.breakpoints$$?.unsubscribe();
   }
 }

@@ -1,24 +1,24 @@
-import { Directive, ElementRef, Input, OnDestroy, OnInit, Renderer2 } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { BootstrapBreakpointService } from '../bootstrap-breakpoint.service';
+import {Directive, ElementRef, Input, OnDestroy, OnInit, Renderer2} from '@angular/core';
+import {Subscription} from 'rxjs';
+import {BreakpointService} from 'ngx-breakpoints';
 
 @Directive({
   selector: '[appAccordionButton]',
 })
 export class AccordionButtonDirective implements OnInit, OnDestroy {
-  constructor(private element: ElementRef, private renderer: Renderer2, private breakpointService: BootstrapBreakpointService) {
+  constructor(private element: ElementRef, private renderer: Renderer2, private breakpoints: BreakpointService) {
   }
 
   @Input()
   appAccordionButton?: string;
 
-  breakpoint$$?: Subscription;
+  breakpoints$$?: Subscription;
 
   ngOnInit(): void {
     this.renderer.addClass(this.element.nativeElement, 'accordion-button');
     this.renderer.setAttribute(this.element.nativeElement, 'data-bs-target', `#collapse-${this.appAccordionButton}`);
     this.renderer.setAttribute(this.element.nativeElement, 'aria-controls', `collapse-${this.appAccordionButton}`);
-    this.breakpoint$$ = this.breakpointService.observeLower('lg').subscribe((isMobileView) => {
+    this.breakpoints$$ = this.breakpoints.observeMobileView().subscribe((isMobileView) => {
       if (isMobileView) {
         this.renderer.addClass(this.element.nativeElement, 'collapsed');
         this.renderer.setAttribute(this.element.nativeElement, 'aria-expanded', 'false');
@@ -36,6 +36,6 @@ export class AccordionButtonDirective implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.breakpoint$$?.unsubscribe();
+    this.breakpoints$$?.unsubscribe();
   }
 }
