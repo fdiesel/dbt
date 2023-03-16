@@ -8,12 +8,14 @@ import { StressFormAddComponent } from './stress/stress-form-add/stress-form-add
 import {FormsModule} from "@angular/forms";
 import { ServiceWorkerModule } from '@angular/service-worker';
 import {NgxEchartsModule} from "ngx-echarts";
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     StressComponent,
-    StressFormAddComponent
+    StressFormAddComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
