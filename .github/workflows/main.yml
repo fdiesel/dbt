@@ -2,19 +2,45 @@ name: Build and Deploy
 
 on:
   push:
-    branches:
-      - main
+    branches: main
 
 jobs:
+
+  release:
+
+    runs-on: ubuntu-latest
+
+    outputs:
+      created: ${{ steps.release.outputs.created }}
+      version: ${{ steps.release.outputs.version }}
+
+    steps:
+
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Tag and Release
+        id: release
+        uses: fdiesel/github-action-node-release@v2.0.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          prefix: v
 
   build-and-deploy:
 
     runs-on: ubuntu-latest
 
+    needs: release
+    if: ${{ always() && needs.release.outputs.created == 'true' }}
+
+    permissions:
+      contents: write
+
     steps:
-    
-    - uses: actions/checkout@v2
-    
+
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
     - name: Build and Deploy
       uses: AhsanAyaz/angular-deploy-gh-pages-actions@v1.3.2
       with:
@@ -23,6 +49,3 @@ jobs:
         base_href: /dbt/
         deploy_branch: gh-pages
         angular_dist_build_folder: dist/dbt
-
-permissions:
-  contents: write
