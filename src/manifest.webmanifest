@@ -1,8 +1,8 @@
 {
   "name": "DBT",
   "short_name": "DBT",
-  "theme_color": "rgb(33, 37, 41)",
-  "background_color": "rgb(33, 37, 41)",
+  "theme_color": "#212529",
+  "background_color": "#212529",
   "display": "standalone",
   "scope": "./",
   "start_url": "./",
