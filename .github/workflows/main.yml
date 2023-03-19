@@ -24,7 +24,7 @@ jobs:
 
       - name: Tag and Release
         id: release
-        uses: fdiesel/github-action-node-release@v2.0.0
+        uses: fdiesel/github-action-node-release@v3.4.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           prefix: v
