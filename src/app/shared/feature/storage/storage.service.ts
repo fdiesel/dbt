@@ -19,4 +19,5 @@ export class StorageService {
 
 export enum Table {
   STRESS = 'stress',
+  FOOD = 'food'
 }

@@ -8,11 +8,12 @@ import {FooterComponent} from './footer/footer.component';
 import {UpdateModule} from "./shared/feature/update/update.module";
 import {NavbarModule} from "./shared/ui/navbar/navbar.module";
 import {StressModule} from "./stress/feature/stress.module";
+import {FoodModule} from "./food/feature/food.module";
 
 @NgModule({
   declarations: [
     AppComponent,
-    FooterComponent
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
@@ -27,6 +28,7 @@ import {StressModule} from "./stress/feature/stress.module";
     UpdateModule,
     NavbarModule,
     StressModule,
+    FoodModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

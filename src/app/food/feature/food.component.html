@@ -1,0 +1,32 @@
+<div class="position-relative h-100">
+  <div class="pb-4">
+    <div class="container-lg text-center my-5">
+      <h1 class="display-1">Food Tracking</h1>
+    </div>
+    <div class="container-lg my-3">
+      <app-day-selector (onDateChange)="day.next($event)"></app-day-selector>
+    </div>
+    <div class="container-lg my-3">
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let item of data$ | async">
+          <p class="mb-1 text-muted small">{{ item.date | date: 'HH:mm:ss' }}</p>
+          <p class="mb-0">{{ item.name }}</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="position-fixed pb-3 bg-light shadow" style="left: 0; right: 0; bottom: 0">
+    <div class="container-lg my-3">
+      <div class="row g-2">
+        <div class="col">
+          <input class="form-control" placeholder="What did you eat?" [(ngModel)]="inputField">
+        </div>
+        <div class="col-auto">
+          <button class="btn btn-primary" (click)="add()">
+            <i class="bi bi-send"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
