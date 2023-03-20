@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { AppUpdateService } from '../../service-workers/app-update';
+import { UpdateService } from './update';
 
 @Component({
   selector: 'app-update-prompt',
   templateUrl: './update-prompt.component.html',
 })
 export class UpdatePromptComponent implements OnInit {
-  constructor(private service: AppUpdateService) {
+  constructor(private service: UpdateService) {
   }
 
   show$?: Observable<boolean>;
@@ -16,7 +16,7 @@ export class UpdatePromptComponent implements OnInit {
     this.show$ = this.service.getShowUpdatePrompt$();
   }
 
-  update(): void {
+  install(): void {
     this.service.update();
   }
 }

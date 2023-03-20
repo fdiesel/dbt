@@ -1,13 +1,18 @@
 import {Component, OnInit} from '@angular/core';
 import {BehaviorSubject, Observable} from "rxjs";
-import {StressDataService} from "./stress-data.service";
-import {StressLevelEntry} from "./stress-level-entry";
+import {StressDataService} from "../data-access/stress-data.service";
+import {StressLevelEntry} from "../data-access/stress-level-entry";
 import {EChartsOption} from "echarts";
 import {map} from "rxjs/operators";
+import {NGX_ECHARTS_CONFIG} from "ngx-echarts";
 
 @Component({
   selector: 'app-stress',
   templateUrl: './stress.component.html',
+  providers: [{
+    provide: NGX_ECHARTS_CONFIG,
+    useFactory: () => ({ echarts: () => import('echarts') })
+  }]
 })
 export class StressComponent implements OnInit {
   constructor(private dataService: StressDataService) {

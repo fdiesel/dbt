@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {StressComponent} from "./stress/stress.component";
+import {StressComponent} from "./stress/feature/stress.component";
 
 const routes: Routes = [
   {

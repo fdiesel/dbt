@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Output} from '@angular/core';
-import {StressLevelEntry} from "../stress-level-entry";
+import {StressLevelEntry} from "../../data-access/stress-level-entry";
 
 @Component({
   selector: 'app-stress-form-add',

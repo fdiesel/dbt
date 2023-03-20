@@ -5,7 +5,7 @@ import { BehaviorSubject, interval, Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class AppUpdateService {
+export class UpdateService {
 
   private showUpdatePrompt$ = new BehaviorSubject(false);
 

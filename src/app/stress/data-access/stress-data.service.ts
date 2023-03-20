@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {StressLevelEntry} from "./stress-level-entry";
 import {BehaviorSubject, Observable} from "rxjs";
-import {StorageService, Table} from "../storage.service";
+import {StorageService, Table} from "../../storage.service";
 
 @Injectable({
   providedIn: 'root'
