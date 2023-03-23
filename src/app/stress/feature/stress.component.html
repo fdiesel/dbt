@@ -1,44 +1,36 @@
-<div class="container-fluid mt-5 text-center">
-  <h1 class="display-1 mb-0">Stress Level</h1>
-</div>
-<div class="container-fluid">
-  <div echarts [options]="chartOption$ | async" style="max-height: 300px"></div>
-</div>
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-auto">
-      <button class="btn btn-link" (click)="prevDay()">
-        <i class="bi bi-caret-left-fill"></i>
-      </button>
+<div class="h-100 d-flex flex-column">
+  <div class="flex-grow-1 overflow-y-auto">
+    <div class="container-fluid mt-5 text-center">
+      <h1 class="display-1 mb-0">Stress Level</h1>
     </div>
-    <div class="col d-flex justify-content-center align-items-center">
-      <span>{{ selectedDate$ | async | date:'dd / MM / yyyy' }}</span>
+    <div class="container-fluid">
+      <div echarts [options]="chartOption$ | async" style="max-height: 300px"></div>
     </div>
-    <div class="col-auto">
-      <button class="btn btn-link" (click)="nextDay()">
-        <i class="bi bi-caret-right-fill"></i>
-      </button>
-    </div>
-  </div>
-</div>
-<div class="container-fluid py-2 text-end">
-  <button class="btn btn-success" (click)="showAdd$.next(true)">Add</button>
-</div>
-<div class="accordion accordion-flush" id="accordion">
-  <div class="accordion-item" *ngFor="let item of data$ | async">
-    <button class="font-monospace" [appAccordionButton]="'collapse-' + item.date">
-      <div class="w-100 row">
-        <div class="col-5">{{ item.date | date:'HH:mm:ss' }}</div>
-        <div class="col-3 text-end">{{ item.level }}</div>
-      </div>
-    </button>
-    <div [appAccordionItem]="'collapse-' + item.date" dataBsParent="accordion">
-      <div class="accordion-body">
-        <div class="mb-2" *ngIf="item.comment">{{ item.comment }}</div>
-        <div class="text-end">
-          <button class="btn btn-danger" (click)="remove(item.date)">Remove</button>
+    <div class="accordion accordion-flush" id="accordion">
+      <div class="accordion-item" *ngFor="let item of data$ | async">
+        <button class="font-monospace" [appAccordionButton]="'collapse-' + item.date">
+          <div class="w-100 row">
+            <div class="col-5">{{ item.date | date:'HH:mm:ss' }}</div>
+            <div class="col-3 text-end">{{ item.level }}</div>
+          </div>
+        </button>
+        <div [appAccordionItem]="'collapse-' + item.date" dataBsParent="accordion">
+          <div class="accordion-body">
+            <div class="mb-2" *ngIf="item.comment">{{ item.comment }}</div>
+            <div class="text-end">
+              <button class="btn btn-danger" (click)="remove(item.date)">Remove</button>
+            </div>
+          </div>
         </div>
       </div>
+    </div>
+  </div>
+  <div class="bg-light shadow">
+    <div class="container-fluid py-2 text-end">
+      <button class="btn btn-success" (click)="showAdd$.next(true)">Add</button>
+    </div>
+    <div class="container-fluid">
+      <app-day-selector (onDateChange)="day$.next($event)"></app-day-selector>
     </div>
   </div>
 </div>

@@ -8,21 +8,18 @@ import {StorageService, Table} from "../../shared/feature/storage/storage.servic
 })
 export class StressDataService {
 
-  constructor(private storage: StorageService) { }
-
-  private isoDate = new BehaviorSubject<string>(new Date().toISOString().substring(0, 10));
-  private data = new BehaviorSubject<StressLevelEntry[]>([]);
-
-  public get date$(): Observable<string> {
-    return this.isoDate.asObservable();
+  constructor(private storage: StorageService) {
+    this.day.subscribe(() => this.update());
   }
+
+  public readonly day = new BehaviorSubject<string>(new Date().toISOString().substring(0, 10));
+  private readonly data = new BehaviorSubject<StressLevelEntry[]>([]);
   public get data$(): Observable<StressLevelEntry[]> {
     return this.data.asObservable();
   }
 
-  public update(isoDate: string): void {
-    this.isoDate.next(isoDate)
-    this.data.next(this.storage.get(Table.STRESS, this.isoDate.getValue()) || [])
+  public update(): void {
+    this.data.next(this.storage.get(Table.STRESS, this.day.getValue()) || [])
   }
 
   public add(entry: StressLevelEntry): void {
@@ -31,7 +28,7 @@ export class StressDataService {
     currentValue.push(entry);
     currentValue.sort((a: StressLevelEntry, b: StressLevelEntry) => a.date.localeCompare(b.date));
     this.storage.set(Table.STRESS, key, currentValue);
-    this.update(this.isoDate.getValue());
+    this.update();
   }
 
   public remove(date: string): void {
@@ -40,6 +37,6 @@ export class StressDataService {
     const index = currentValue.findIndex((item: any) => item.date === date);
     currentValue.splice(index, 1);
     this.storage.set(Table.STRESS, key, currentValue);
-    this.update(this.isoDate.getValue());
+    this.update();
   }
 }

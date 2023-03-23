@@ -22,11 +22,12 @@ export class StressComponent implements OnInit {
 
   data$!: Observable<StressLevelEntry[]>;
 
-  selectedDate$ = new BehaviorSubject(new Date());
+  day$!: BehaviorSubject<string>;
 
   chartOption$!: Observable<EChartsOption>;
 
   ngOnInit(): void {
+    this.day$ = this.dataService.day;
     this.data$ = this.dataService.data$.pipe(
       map((data) => data.reverse())
     );
@@ -38,7 +39,7 @@ export class StressComponent implements OnInit {
         )
       })
     );
-    this.update();
+    this.dataService.update();
   }
 
   createChartOptions(xAxisData: any[], seriesData: any[]): EChartsOption {
@@ -60,25 +61,6 @@ export class StressComponent implements OnInit {
       ],
     }
   }
-
-  nextDay(): void {
-    this.selectedDate$.next(
-      new Date(this.selectedDate$.getValue().setDate(this.selectedDate$.getValue().getDate() + 1))
-    );
-    this.update();
-  }
-
-  prevDay(): void {
-    this.selectedDate$.next(
-      new Date(this.selectedDate$.getValue().setDate(this.selectedDate$.getValue().getDate() - 1))
-    );
-    this.update();
-  }
-
-  update(): void {
-    this.dataService.update(this.selectedDate$.getValue().toISOString().substring(0, 10));
-  }
-
   add(entry: StressLevelEntry): void {
     this.showAdd$.next(false);
     this.dataService.add(entry);

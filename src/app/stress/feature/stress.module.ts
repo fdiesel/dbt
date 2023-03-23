@@ -7,6 +7,7 @@ import {FormsModule} from "@angular/forms";
 import {PopUpCardModule} from "../../shared/ui/pop-up-card/pop-up-card.module";
 import {AccordionModule} from "../../shared/ui/accordion/accordion.module";
 import {RouterModule, Routes} from "@angular/router";
+import {DaySelectorModule} from "../../shared/ui/day-selector/day-selector.module";
 
 const routes: Routes = [
   {
@@ -26,6 +27,7 @@ const routes: Routes = [
     }),
     PopUpCardModule,
     AccordionModule,
+    DaySelectorModule,
   ],
 })
 export class StressModule {
