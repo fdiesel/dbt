@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
 })
 export class FooterComponent {
   // @ts-ignore
-  version = require('../../../package.json').version;
+  version = require('../../../../package.json').version;
 }

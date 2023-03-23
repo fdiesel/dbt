@@ -6,20 +6,27 @@ import {StressFormAddComponent} from "../ui/stress-form-add/stress-form-add.comp
 import {FormsModule} from "@angular/forms";
 import {PopUpCardModule} from "../../shared/ui/pop-up-card/pop-up-card.module";
 import {AccordionModule} from "../../shared/ui/accordion/accordion.module";
+import {RouterModule, Routes} from "@angular/router";
 
+const routes: Routes = [
+  {
+    path: '',
+    component: StressComponent
+  }
+]
 
 @NgModule({
   declarations: [StressComponent, StressFormAddComponent],
   imports: [
     CommonModule,
     FormsModule,
+    RouterModule.forChild(routes),
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts'),
     }),
     PopUpCardModule,
     AccordionModule,
   ],
-  exports: [StressComponent]
 })
 export class StressModule {
 }

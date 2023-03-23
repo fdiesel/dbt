@@ -1,6 +1,5 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {StressComponent} from "./stress/feature/stress.component";
 import {FoodComponent} from "./food/feature/food.component";
 
 const routes: Routes = [
@@ -10,7 +9,10 @@ const routes: Routes = [
     redirectTo: 'stress'
   }, {
     path: 'stress',
-    component: StressComponent
+    loadChildren: () =>
+      import('./stress/feature/stress.module').then(
+        (m) => m.StressModule
+      )
   }, {
     path: 'food',
     component: FoodComponent

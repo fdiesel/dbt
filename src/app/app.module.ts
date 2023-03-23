@@ -4,16 +4,14 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {FormsModule} from "@angular/forms";
 import {ServiceWorkerModule} from '@angular/service-worker';
-import {FooterComponent} from './footer/footer.component';
 import {UpdateModule} from "./shared/feature/update/update.module";
 import {NavbarModule} from "./shared/ui/navbar/navbar.module";
-import {StressModule} from "./stress/feature/stress.module";
 import {FoodModule} from "./food/feature/food.module";
+import {FooterModule} from "./footer/feature/footer.module";
 
 @NgModule({
   declarations: [
     AppComponent,
-    FooterComponent,
   ],
   imports: [
     BrowserModule,
@@ -27,7 +25,7 @@ import {FoodModule} from "./food/feature/food.module";
     }),
     UpdateModule,
     NavbarModule,
-    StressModule,
+    FooterModule,
     FoodModule,
   ],
   providers: [],
