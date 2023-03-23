@@ -26,11 +26,13 @@
     </div>
   </div>
   <div class="bg-light shadow">
-    <div class="container-fluid py-2 text-end">
-      <button class="btn btn-success" (click)="showAdd$.next(true)">Add</button>
-    </div>
-    <div class="container-fluid">
+    <div class="container-fluid my-2">
       <app-day-selector (onDateChange)="day$.next($event)"></app-day-selector>
+    </div>
+    <div class="container-lg my-2">
+      <div class="d-grid">
+        <button class="btn btn-success" (click)="showAdd$.next(true)">Add</button>
+      </div>
     </div>
   </div>
 </div>
