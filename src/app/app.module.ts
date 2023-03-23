@@ -6,7 +6,6 @@ import {FormsModule} from "@angular/forms";
 import {ServiceWorkerModule} from '@angular/service-worker';
 import {UpdateModule} from "./shared/feature/update/update.module";
 import {NavbarModule} from "./shared/ui/navbar/navbar.module";
-import {FoodModule} from "./food/feature/food.module";
 import {FooterModule} from "./footer/feature/footer.module";
 
 @NgModule({
@@ -26,7 +25,6 @@ import {FooterModule} from "./footer/feature/footer.module";
     UpdateModule,
     NavbarModule,
     FooterModule,
-    FoodModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,6 +1,5 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {FoodComponent} from "./food/feature/food.component";
 
 const routes: Routes = [
   {
@@ -15,7 +14,10 @@ const routes: Routes = [
       )
   }, {
     path: 'food',
-    component: FoodComponent
+    loadChildren: () =>
+      import('./food/feature/food.module').then(
+        (m) => m.FoodModule
+      )
   }
 ];
 
