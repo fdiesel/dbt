@@ -11,7 +11,7 @@ import {NGX_ECHARTS_CONFIG} from "ngx-echarts";
   templateUrl: './stress.component.html',
   providers: [{
     provide: NGX_ECHARTS_CONFIG,
-    useFactory: () => ({ echarts: () => import('echarts') })
+    useFactory: () => ({echarts: () => import('echarts')})
   }]
 })
 export class StressComponent implements OnInit {
@@ -34,19 +34,22 @@ export class StressComponent implements OnInit {
     this.chartOption$ = this.dataService.data$.pipe(
       map((data) => {
         return this.createChartOptions(
-          data.map(item => new Date(item.date).toISOString().substring(11, 16)),
-          data.map(item => item.level)
+          data.map(item => [item.date, item.level])
         )
       })
     );
     this.dataService.update();
   }
 
-  createChartOptions(xAxisData: any[], seriesData: any[]): EChartsOption {
+  createChartOptions(seriesData: [string, number][]): EChartsOption {
     return {
       xAxis: {
-        type: 'category',
-        data: xAxisData,
+        type: 'time',
+        axisLabel: {
+          formatter: (date: any) => new Date(date).toLocaleTimeString().substring(0, 5),
+        },
+        min: `${this.day$.getValue()}T05:00:00.000Z`,
+        max: `${this.day$.getValue()}T20:00:00.000Z`,
       },
       yAxis: {
         type: 'value',
@@ -61,6 +64,7 @@ export class StressComponent implements OnInit {
       ],
     }
   }
+
   add(entry: StressLevelEntry): void {
     this.showAdd$.next(false);
     this.dataService.add(entry);
