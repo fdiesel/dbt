@@ -18,6 +18,12 @@ const routes: Routes = [
       import('./food/feature/food.module').then(
         (m) => m.FoodModule
       )
+  }, {
+    path: 'settings',
+    loadChildren: () =>
+      import('./settings/feature/settings.module').then(
+        (m) => m.SettingsModule
+      )
   }
 ];
 
