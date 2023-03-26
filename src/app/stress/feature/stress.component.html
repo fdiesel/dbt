@@ -10,7 +10,7 @@
       <div class="accordion-item" *ngFor="let item of data$ | async">
         <button class="font-monospace" [appAccordionButton]="'collapse-' + item.date">
           <div class="w-100 row">
-            <div class="col-5">{{ item.date | date:'HH:mm:ss' }}</div>
+            <div class="col-5">{{ item.date | date:'HH:mm' }}</div>
             <div class="col-3 text-end">{{ item.level }}</div>
           </div>
         </button>
