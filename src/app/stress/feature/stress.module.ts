@@ -9,6 +9,7 @@ import {AccordionModule} from "../../shared/ui/accordion/accordion.module";
 import {RouterModule, Routes} from "@angular/router";
 import {DaySelectorModule} from "../../shared/ui/day-selector/day-selector.module";
 import {SwipeDeleteModule} from "../../shared/ui/swipe-delete/swipe-delete.module";
+import {StressLeveColorPipe} from "../util/stress-leve-color.pipe";
 
 const routes: Routes = [
   {
@@ -18,7 +19,11 @@ const routes: Routes = [
 ]
 
 @NgModule({
-  declarations: [StressComponent, StressFormAddComponent],
+  declarations: [
+    StressComponent,
+    StressFormAddComponent,
+    StressLeveColorPipe
+  ],
   imports: [
     CommonModule,
     FormsModule,
