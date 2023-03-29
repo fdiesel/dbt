@@ -6,6 +6,12 @@
     <div class="container-fluid">
       <div echarts [options]="chartOption$ | async" style="max-height: 300px"></div>
     </div>
+    <ul class="list-group list-group-flush">
+      <li delete class="list-group-item" *ngFor="let item of data$ | async">
+          <p class="mb-0 font-monospace">{{ item.date | date:'HH:mm' }} {{ item.level }}</p>
+          <p class="mb-0">{{ item.comment }}</p>
+      </li>
+    </ul>
     <div class="accordion accordion-flush" id="accordion">
       <div class="accordion-item" *ngFor="let item of data$ | async">
         <button class="font-monospace" [appAccordionButton]="'collapse-' + item.date">
