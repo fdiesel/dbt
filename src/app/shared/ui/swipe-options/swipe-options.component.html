@@ -1,12 +1,11 @@
 <div style="overflow-x: hidden">
-  <div #boundary>
+  <div #boundary cdkScrollable>
     <div #drag
          cdkDrag
          cdkDragLockAxis="x"
          [cdkDragBoundary]="boundary"
          [cdkDragFreeDragPosition]="startPoint"
          (cdkDragEnded)="onDragEnd($event)"
-         cdkScrollable
          style="display: flex; align-items: stretch">
       <div #before>
         <ng-content select="[before]"></ng-content>
