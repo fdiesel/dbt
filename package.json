@@ -1,6 +1,6 @@
 {
   "name": "dbt",
-  "version": "3.3.2",
+  "version": "3.4.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
