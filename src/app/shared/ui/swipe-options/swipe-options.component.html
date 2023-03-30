@@ -1,21 +1,13 @@
-<div style="overflow-x: hidden">
-  <div #boundary cdkScrollable>
-    <div #drag
-         cdkDrag
-         cdkDragLockAxis="x"
-         [cdkDragBoundary]="boundary"
-         [cdkDragFreeDragPosition]="startPoint"
-         (cdkDragEnded)="onDragEnd($event)"
-         style="display: flex; align-items: stretch">
-      <div #before>
-        <ng-content select="[before]"></ng-content>
-      </div>
-      <div #center>
-        <ng-content select="[content]"></ng-content>
-      </div>
-      <div #after>
-        <ng-content select="[after]"></ng-content>
-      </div>
+<div #boundary class="boundary" (touchend)="snap()" (scroll)="scrollSnap()">
+  <div #drag class="drag">
+    <div #before class="item before">
+      <ng-content select="[before]"></ng-content>
+    </div>
+    <div #center class="item center">
+      <ng-content select="[content]"></ng-content>
+    </div>
+    <div #after class="item after">
+      <ng-content select="[after]"></ng-content>
     </div>
   </div>
 </div>

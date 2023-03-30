@@ -1,12 +1,13 @@
-import {AfterViewInit, Component, ElementRef, Renderer2, ViewChild} from '@angular/core';
-import {CdkDragEnd, Point} from "@angular/cdk/drag-drop";
+import {AfterViewInit, Component, ElementRef, OnDestroy, Renderer2, ViewChild} from '@angular/core';
 import {SwipeOptionsService} from "./swipe-options.service";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: '[swipe-options]',
   templateUrl: './swipe-options.component.html',
+  styleUrls: ['./swipe-options.component.sass']
 })
-export class SwipeOptionsComponent implements AfterViewInit {
+export class SwipeOptionsComponent implements AfterViewInit, OnDestroy {
   constructor(private readonly renderer: Renderer2,
               private readonly service: SwipeOptionsService) {
   }
@@ -17,70 +18,79 @@ export class SwipeOptionsComponent implements AfterViewInit {
   @ViewChild('center') centerElement!: ElementRef;
   @ViewChild('after') afterElement!: ElementRef;
 
+  swipe$$!: Subscription;
+
   beforeWidth = 0;
   afterWidth = 0;
 
   ngAfterViewInit(): void {
     this.beforeWidth = this.beforeElement.nativeElement.offsetWidth;
     this.afterWidth = this.afterElement.nativeElement.offsetWidth;
-    this.renderer.setStyle(this.boundaryElement.nativeElement, 'transform', 'translateX(calc(-' + this.beforeWidth + 'px - ' + this.afterWidth + 'px))')
-    this.renderer.setStyle(this.boundaryElement.nativeElement, 'width', `calc(100% + ${this.beforeWidth}px * 2 + ${this.afterWidth}px * 2)`);
-    const innerWidth = `calc(100% - ${this.beforeWidth}px - ${this.afterWidth}px)`;
-    this.renderer.setStyle(this.dragElement.nativeElement, 'width', innerWidth);
-    this.renderer.setStyle(this.centerElement.nativeElement, 'width', innerWidth);
-    this.moveTo('center');
-    this.service.swipe.subscribe(() => {
+    this.boundaryElement.nativeElement.scroll({
+      top: 0,
+      left: this.beforeWidth
+    });
+    this.swipe$$ = this.service.swipe.subscribe(() => {
       if (this.position !== 'center') {
         this.moveTo('center');
       }
     });
   }
 
-  startPoint: Point = {
-    x: 0,
-    y: 0
-  }
-
   position: 'before' | 'center' | 'after' = 'center';
 
   moveTo(position: typeof this.position): void {
-    this.service.swipe.next();
+    if (position !== 'center') {
+      this.service.swipe.next();
+    }
     this.position = position;
-    this.renderer.setStyle(this.dragElement.nativeElement, 'transition', 'transform 200ms ease');
-    setTimeout(() => {
-      this.renderer.removeStyle(this.dragElement.nativeElement, 'transition');
-    }, 200);
     switch (position) {
       case 'before':
-        this.startPoint = {
-          x: this.beforeWidth + this.afterWidth,
-          y: 0
-        };
+        this.boundaryElement.nativeElement.scroll({
+          top: 0,
+          left: this.beforeWidth + this.afterWidth,
+          behavior: 'smooth'
+        });
         break;
       case 'center':
-        this.startPoint = {
-          x: this.afterWidth,
-          y: 0
-        }
+        this.boundaryElement.nativeElement.scroll({
+          top: 0,
+          left: this.beforeWidth,
+          behavior: 'smooth'
+        });
         break;
       case 'after':
-        this.startPoint = {
-          x: 0,
-          y: 0
-        }
+        this.boundaryElement.nativeElement.scroll({
+          top: 0,
+          left: 0,
+          behavior: 'smooth'
+        });
         break;
     }
   }
 
-  onDragEnd(cdkDragEnd: CdkDragEnd): void {
-    const endPoint: Point = cdkDragEnd.source.getFreeDragPosition();
-    if (endPoint.x < this.afterWidth / 2) {
+  private scrollTimeout: any;
+
+  scrollSnap(): void {
+    clearTimeout(this.scrollTimeout);
+    this.scrollTimeout = setTimeout(() => {
+      this.snap();
+    }, 100)
+  }
+
+  snap(): void {
+    const scrollLeft = this.boundaryElement.nativeElement.scrollLeft;
+    if (scrollLeft < this.beforeWidth / 2) {
       this.moveTo('after');
-    } else if (endPoint.x > this.afterWidth + this.beforeWidth / 2) {
+    } else if (scrollLeft > this.beforeWidth + this.afterWidth / 2) {
       this.moveTo('before');
     } else {
       this.moveTo('center');
     }
+  }
+
+  ngOnDestroy() {
+    this.swipe$$.unsubscribe();
   }
 }
 
