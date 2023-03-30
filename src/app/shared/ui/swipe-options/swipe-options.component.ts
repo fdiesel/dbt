@@ -1,12 +1,14 @@
 import {AfterViewInit, Component, ElementRef, Renderer2, ViewChild} from '@angular/core';
 import {CdkDragEnd, Point} from "@angular/cdk/drag-drop";
+import {SwipeOptionsService} from "./swipe-options.service";
 
 @Component({
   selector: '[swipe-options]',
   templateUrl: './swipe-options.component.html',
 })
 export class SwipeOptionsComponent implements AfterViewInit {
-  constructor(private readonly renderer: Renderer2) {
+  constructor(private readonly renderer: Renderer2,
+              private readonly service: SwipeOptionsService) {
   }
 
   @ViewChild('boundary') boundaryElement!: ElementRef;
@@ -27,6 +29,11 @@ export class SwipeOptionsComponent implements AfterViewInit {
     this.renderer.setStyle(this.dragElement.nativeElement, 'width', innerWidth);
     this.renderer.setStyle(this.centerElement.nativeElement, 'width', innerWidth);
     this.moveTo('center');
+    this.service.swipe.subscribe(() => {
+      if (this.position !== 'center') {
+        this.moveTo('center');
+      }
+    });
   }
 
   startPoint: Point = {
@@ -34,12 +41,17 @@ export class SwipeOptionsComponent implements AfterViewInit {
     y: 0
   }
 
-  position: 'start' | 'center' | 'end' = 'center';
+  position: 'before' | 'center' | 'after' = 'center';
 
   moveTo(position: typeof this.position): void {
+    this.service.swipe.next();
     this.position = position;
+    this.renderer.setStyle(this.dragElement.nativeElement, 'transition', 'transform 200ms ease');
+    setTimeout(() => {
+      this.renderer.removeStyle(this.dragElement.nativeElement, 'transition');
+    }, 200);
     switch (position) {
-      case 'start':
+      case 'before':
         this.startPoint = {
           x: this.beforeWidth + this.afterWidth,
           y: 0
@@ -51,7 +63,7 @@ export class SwipeOptionsComponent implements AfterViewInit {
           y: 0
         }
         break;
-      case 'end':
+      case 'after':
         this.startPoint = {
           x: 0,
           y: 0
@@ -63,9 +75,9 @@ export class SwipeOptionsComponent implements AfterViewInit {
   onDragEnd(cdkDragEnd: CdkDragEnd): void {
     const endPoint: Point = cdkDragEnd.source.getFreeDragPosition();
     if (endPoint.x < this.afterWidth / 2) {
-      this.moveTo('end');
+      this.moveTo('after');
     } else if (endPoint.x > this.afterWidth + this.beforeWidth / 2) {
-      this.moveTo('start');
+      this.moveTo('before');
     } else {
       this.moveTo('center');
     }
