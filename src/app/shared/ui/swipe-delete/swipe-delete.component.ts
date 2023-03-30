@@ -3,7 +3,6 @@ import {Component, EventEmitter, HostBinding, Output} from '@angular/core';
 @Component({
   selector: 'li[delete]',
   templateUrl: './swipe-delete.component.html',
-  styleUrls: ['./swipe-delete.component.sass']
 })
 export class SwipeDeleteComponent {
   @Output() onDelete = new EventEmitter();

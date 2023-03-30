@@ -1,0 +1,21 @@
+<div style="overflow: hidden">
+  <div #boundary>
+    <div #drag
+         cdkDrag
+         cdkDragLockAxis="x"
+         [cdkDragBoundary]="boundary"
+         [cdkDragFreeDragPosition]="startPoint"
+         (cdkDragEnded)="onDragEnd($event)"
+         style="display: flex; align-items: stretch">
+      <div #before>
+        <ng-content select="[before]"></ng-content>
+      </div>
+      <div #center>
+        <ng-content select="[content]"></ng-content>
+      </div>
+      <div #after>
+        <ng-content select="[after]"></ng-content>
+      </div>
+    </div>
+  </div>
+</div>

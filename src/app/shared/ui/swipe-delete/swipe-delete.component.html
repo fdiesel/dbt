@@ -1,12 +1,6 @@
-<div class="container-fluid p-0" swipe (previous)="hide()" (next)="show()">
-  <div class="row g-0">
-    <div class="col">
-      <div class="p-3">
-        <ng-content></ng-content>
-      </div>
-    </div>
-    <div id="delete-wrap" class="col-auto" [class.show]="showDelete">
-      <button id="delete" class="btn btn-danger p-0 rounded-0 w-100 h-100" (click)="onDelete.emit()">Delete</button>
-    </div>
+<div class="container-fluid p-0" swipe-options>
+  <div content class="p-3">
+    <ng-content></ng-content>
   </div>
+  <button after class="btn btn-danger py-0 rounded-0 w-100 h-100" (click)="onDelete.emit()">Delete</button>
 </div>
