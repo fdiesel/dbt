@@ -6,6 +6,7 @@
          [cdkDragBoundary]="boundary"
          [cdkDragFreeDragPosition]="startPoint"
          (cdkDragEnded)="onDragEnd($event)"
+         cdkScrollable
          style="display: flex; align-items: stretch">
       <div #before>
         <ng-content select="[before]"></ng-content>

@@ -1,7 +1,8 @@
 import {NgModule} from '@angular/core';
+import {CdkDrag, CdkDragPlaceholder, CdkDragPreview, CdkDropList, CdkDropListGroup} from "@angular/cdk/drag-drop";
+import {CdkScrollable} from "@angular/cdk/overlay";
 import {CommonModule} from '@angular/common';
 import {SwipeOptionsComponent} from './swipe-options.component';
-import {CdkDrag, CdkDragPlaceholder, CdkDragPreview, CdkDropList, CdkDropListGroup} from "@angular/cdk/drag-drop";
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import {CdkDrag, CdkDragPlaceholder, CdkDragPreview, CdkDropList, CdkDropListGro
     CdkDropList,
     CdkDropListGroup,
     CdkDragPlaceholder,
-    CdkDragPreview
+    CdkDragPreview,
+    CdkScrollable
   ]
 })
 export class SwipeOptionsModule {
