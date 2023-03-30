@@ -8,17 +8,17 @@
     </div>
     <ul class="list-group list-group-flush mb-5">
         <li delete class="list-group-item" *ngFor="let item of data$ | async" (onDelete)="remove(item.date)">
-          <div class="container-fluid font-monospace p-0">
+          <div class="container-fluid p-0">
             <div class="row g-2">
               <div class="col-auto">
                 <div class="rounded-pill bg-light p-3">
-                  <div>{{ item.date | date:'HH:mm' }}</div>
+                  <div class="font-monospace">{{ item.date | date:'HH:mm' }}</div>
                 </div>
               </div>
               <div class="col-auto">
                 <div class="rounded-circle p-3 text-center fw-bold text-light"
                      [class]="'bg-' + (item.level | stressLeveColor)">
-                  <div style="width: 1.5em">{{ item.level }}</div>
+                  <div class="font-monospace" style="width: 1.5em">{{ item.level }}</div>
                 </div>
               </div>
               <div class="col d-flex align-items-center">
