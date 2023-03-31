@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, ElementRef, OnDestroy, Renderer2, ViewChild} from '@angular/core';
-import {SwipeOptionsService} from "./swipe-options.service";
 import {Subscription} from "rxjs";
+import {SwipeOptionsService} from "./swipe-options.service";
 
 @Component({
   selector: '[swipe-options]',
@@ -70,15 +70,23 @@ export class SwipeOptionsComponent implements AfterViewInit, OnDestroy {
   }
 
   private scrollTimeout: any;
+  private doScrollSnap = true;
+
+  blockScrollSnap(): void {
+    this.doScrollSnap = false;
+  }
 
   scrollSnap(): void {
-    clearTimeout(this.scrollTimeout);
-    this.scrollTimeout = setTimeout(() => {
-      this.snap();
-    }, 100)
+    if (this.doScrollSnap) {
+      clearTimeout(this.scrollTimeout);
+      this.scrollTimeout = setTimeout(() => {
+        this.snap();
+      }, 100)
+    }
   }
 
   snap(): void {
+    this.doScrollSnap = true;
     const scrollLeft = this.boundaryElement.nativeElement.scrollLeft;
     if (scrollLeft < this.beforeWidth / 2) {
       this.moveTo('after');

@@ -1,4 +1,4 @@
-<div #boundary class="boundary" (touchend)="snap()" (scroll)="scrollSnap()">
+<div #boundary class="boundary" (touchstart)="blockScrollSnap()" (touchend)="snap()" (scroll)="scrollSnap()">
   <div #drag class="drag">
     <div #before class="item before">
       <ng-content select="[before]"></ng-content>
