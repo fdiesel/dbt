@@ -13,6 +13,12 @@ const routes: Routes = [
         (m) => m.StressModule
       )
   }, {
+    path: 'skills',
+    loadChildren: () =>
+      import('./skills/feature/skill-list/skill-list.module').then(
+        (m) => m.SkillListModule
+      )
+  }, {
     path: 'food',
     loadChildren: () =>
       import('./food/feature/food.module').then(

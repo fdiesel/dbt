@@ -1,0 +1,67 @@
+<div class="h-100 d-flex flex-column">
+  <div class="flex-grow-1 overflow-y-auto">
+    <div class="container-fluid my-5 text-center">
+      <h1 class="display-1 mb-0">Skill List</h1>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li swipe-options class="list-group-item p-0" *ngFor="let skill of skillList | async; index as i">
+        <div before class="h-100">
+          <button class="h-100 btn btn-secondary rounded-0" (click)="up(i)">
+            <i class="bi bi-caret-up-fill"></i>
+          </button>
+          <button class="h-100 btn btn-secondary rounded-0" (click)="down(i)">
+            <i class="bi bi-caret-down-fill"></i>
+          </button>
+        </div>
+        <div content class="px-3 py-2">
+          <div class="row g-2">
+            <div class="col-auto">
+              <h5 class="display-5 mb-0">{{ skill.name }}</h5>
+            </div>
+            <div class="col"></div>
+            <div class="col-auto text-muted">{{ skill.from }} - {{ skill.to }}</div>
+            <div class="col-12 d-flex justify-content-end gap-2">
+            <span class="badge bg-primary"
+                  *ngFor="let tag of skill.tags">{{ tag }}</span>
+            </div>
+          </div>
+        </div>
+        <button after class="h-100 btn btn-danger rounded-0" (click)="delete(i)">Delete</button>
+      </li>
+    </ul>
+  </div>
+  <div class="bg-light shadow" style="left: 0; right: 0; bottom: 0">
+    <div class="container-lg my-2">
+      <div class="row g-2">
+        <div class="col-3">
+          <select class="form-select" [(ngModel)]="skillForm.from">
+            <option *ngFor="let n of [0,10,20,30,40,50,60,70,80,90,100]" [value]="n">{{ n }}</option>
+          </select>
+        </div>
+        <div class="col-1 col-form-label text-center">
+          <span>-</span>
+        </div>
+        <div class="col-3">
+          <select class="form-select" [(ngModel)]="skillForm.to">
+            <option *ngFor="let n of [0,10,20,30,40,50,60,70,80,90,100]" [value]="n">{{ n }}</option>
+          </select>
+        </div>
+        <div class="col-5">
+          <input class="form-control" placeholder="Tag" [(ngModel)]="tagForm">
+        </div>
+      </div>
+    </div>
+    <div class="container-lg my-2">
+      <div class="row g-2">
+        <div class="col">
+          <input class="form-control form-control-lg" placeholder="Name" [(ngModel)]="skillForm.name">
+        </div>
+        <div class="col-auto">
+          <button class="btn btn-lg btn-primary" (click)="add()">
+            <i class="bi bi-send"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

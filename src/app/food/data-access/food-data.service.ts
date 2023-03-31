@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from "rxjs";
 import {FoodEntry} from "./food-entry";
-import {StorageService, Table} from "../../shared/feature/storage/storage.service";
+import {StorageService} from "../../shared/feature/storage/storage.service";
 
 @Injectable({
   providedIn: 'root'
@@ -20,17 +20,17 @@ export class FoodDataService {
   }
 
   public update(): void {
-    const data = this.storage.get(Table.FOOD, this.day.getValue()) || [];
+    const data = this.storage.get('food', this.day.getValue()) || [];
     this.data.next(data);
   }
 
   public add(name: string): void {
-    const currentValue: FoodEntry[] = this.storage.get(Table.FOOD, this.day.getValue()) || [];
+    const currentValue: FoodEntry[] = this.storage.get('food', this.day.getValue()) || [];
     currentValue.push({
       date: new Date().toISOString(),
       name,
     });
     currentValue.sort((a: FoodEntry, b: FoodEntry) => a.date.localeCompare(b.date));
-    this.storage.set(Table.FOOD, this.day.getValue(), currentValue);
+    this.storage.set('food', this.day.getValue(), currentValue);
   }
 }
