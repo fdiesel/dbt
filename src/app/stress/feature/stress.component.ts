@@ -48,8 +48,8 @@ export class StressComponent implements OnInit {
         axisLabel: {
           formatter: (date: any) => new Date(date).toLocaleTimeString().substring(0, 5),
         },
-        min: `${this.day$.getValue()}T05:00:00.000Z`,
-        max: `${this.day$.getValue()}T20:00:00.000Z`,
+        min: `${this.day$.getValue()}T04:00:00.000Z`,
+        max: `${this.day$.getValue()}T22:00:00.000Z`,
       },
       yAxis: {
         type: 'value',
