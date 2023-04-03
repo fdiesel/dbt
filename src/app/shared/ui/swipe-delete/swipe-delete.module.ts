@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {SwipeDeleteComponent} from './swipe-delete.component';
-import {SwipeOptionsModule} from "../swipe-options/swipe-options.module";
+import {NgxSwipeOptionsModule} from "ngx-swipe-options";
 
 
 @NgModule({
@@ -10,7 +10,7 @@ import {SwipeOptionsModule} from "../swipe-options/swipe-options.module";
   ],
     imports: [
         CommonModule,
-        SwipeOptionsModule
+        NgxSwipeOptionsModule
     ],
   exports: [
     SwipeDeleteComponent

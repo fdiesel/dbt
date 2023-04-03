@@ -29,6 +29,7 @@ export class SkillListComponent implements OnInit {
     add(): void {
       if (this.skillForm.name !== '') {
         this.skillForm.tags = this.tagForm.split(' ');
+        this.skillForm.tags.sort((a: string, b: string) => a.localeCompare(b));
         this.dataService.create(this.skillForm);
         this.skillForm = {
           name: '',

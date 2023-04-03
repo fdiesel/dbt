@@ -4,7 +4,7 @@
       <h1 class="display-1 mb-0">Skill List</h1>
     </div>
     <ul class="list-group list-group-flush">
-      <li swipe-options class="list-group-item p-0" *ngFor="let skill of skillList | async; index as i">
+      <li ngx-swipe-options class="list-group-item p-0" *ngFor="let skill of skillList | async; index as i">
         <div before class="h-100">
           <button class="h-100 btn btn-secondary rounded-0" (click)="up(i)">
             <i class="bi bi-caret-up-fill"></i>
@@ -47,7 +47,7 @@
           </select>
         </div>
         <div class="col-5">
-          <input class="form-control" placeholder="Tag" [(ngModel)]="tagForm">
+          <input class="form-control" placeholder="Tags" [(ngModel)]="tagForm">
         </div>
       </div>
     </div>
