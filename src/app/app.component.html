@@ -5,6 +5,6 @@
   <router-outlet></router-outlet>
 </main>
 <footer>
-  <app-update-prompt></app-update-prompt>
+  <app-update-prompt *ngIf="production"></app-update-prompt>
   <app-footer></app-footer>
 </footer>

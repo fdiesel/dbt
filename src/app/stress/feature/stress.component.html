@@ -25,6 +25,16 @@
 <!--      </tbody>-->
 <!--    </table>-->
     <ul class="list-group list-group-flush mb-5">
+      <li class="list-group-item p-0">
+        <div class="container-fluid p-0">
+          <div class="row g-0">
+            <div class="col-2 px-1 py-3 fw-bold">Time</div>
+            <div class="col-2 px-1 py-3 fw-bold">Stress</div>
+            <div class="col-2 px-1 py-3 fw-bold">Mood</div>
+            <div class="col-6 px-1 py-3 fw-bold">Comment</div>
+          </div>
+        </div>
+      </li>
       <li delete class="list-group-item" *ngFor="let item of data$ | async" (onDelete)="remove(item.date)">
         <div class="container-fluid p-0">
           <div class="row g-0">
@@ -41,7 +51,7 @@
             </div>
             <div class="col-2">
               <div class="h-100 py-3 text-center fw-bold text-light"
-                   [class]="'bg-' + (100 - item.mood | stressLeveColor)">
+                   [class]="'bg-' + ((item.mood ? 100 - item.mood : undefined) | stressLeveColor)">
                 <span class="font-monospace">{{ item.mood }}</span>
               </div>
             </div>
