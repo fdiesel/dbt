@@ -1,32 +1,56 @@
 <div class="h-100 d-flex flex-column">
   <div class="flex-grow-1 overflow-y-auto">
     <div class="container-fluid mt-5 text-center">
-      <h1 class="display-1 mb-0">Stress Level</h1>
+      <h1 class="display-1 mb-0">Stress & Mood</h1>
     </div>
     <div class="container-fluid">
       <div echarts [options]="chartOption$ | async" style="max-height: 300px"></div>
     </div>
+<!--    <table class="table">-->
+<!--      <thead>-->
+<!--      <tr>-->
+<!--        <th scope="col">Time</th>-->
+<!--        <th scope="col">Stress</th>-->
+<!--        <th scope="col">Mood</th>-->
+<!--        <th scope="col">Comment</th>-->
+<!--      </tr>-->
+<!--      </thead>-->
+<!--      <tbody>-->
+<!--      <tr *ngFor="let item of data$ | async">-->
+<!--        <td class="font-monospace">{{ item.date | date:'HH:mm' }}</td>-->
+<!--        <td class="font-monospace text-center">{{ item.level }}%</td>-->
+<!--        <td class="font-monospace text-center">{{ item.mood }}%</td>-->
+<!--        <td>{{ item.comment }}</td>-->
+<!--      </tr>-->
+<!--      </tbody>-->
+<!--    </table>-->
     <ul class="list-group list-group-flush mb-5">
-        <li delete class="list-group-item" *ngFor="let item of data$ | async" (onDelete)="remove(item.date)">
-          <div class="container-fluid p-0">
-            <div class="row g-2">
-              <div class="col-auto">
-                <div class="rounded-pill bg-light p-3">
-                  <div class="font-monospace">{{ item.date | date:'HH:mm' }}</div>
-                </div>
-              </div>
-              <div class="col-auto">
-                <div class="rounded-circle p-3 text-center fw-bold text-light"
-                     [class]="'bg-' + (item.level | stressLeveColor)">
-                  <div class="font-monospace" style="width: 1.5em">{{ item.level }}</div>
-                </div>
-              </div>
-              <div class="col d-flex align-items-center">
-                <p class="mb-0 small">{{ item.comment }}</p>
+      <li delete class="list-group-item" *ngFor="let item of data$ | async" (onDelete)="remove(item.date)">
+        <div class="container-fluid p-0">
+          <div class="row g-0">
+            <div class="col-2">
+              <div class="h-100 py-3 text-center bg-light">
+                <div class="font-monospace">{{ item.date | date:'HH:mm' }}</div>
               </div>
             </div>
+            <div class="col-2">
+              <div class="h-100 py-3 text-center fw-bold text-light"
+                   [class]="'bg-' + (item.level | stressLeveColor)">
+                <span class="font-monospace">{{ item.level }}</span>
+              </div>
+            </div>
+            <div class="col-2">
+              <div class="h-100 py-3 text-center fw-bold text-light"
+                   [class]="'bg-' + (100 - item.mood | stressLeveColor)">
+                <span class="font-monospace">{{ item.mood }}</span>
+              </div>
+            </div>
+            <div class="col d-flex align-items-center p-3">
+              <p class="mb-0">{{ item.comment }}</p>
+            </div>
           </div>
-        </li>
+        </div>
+      </li>
     </ul>
   </div>
   <div class="bg-light shadow">

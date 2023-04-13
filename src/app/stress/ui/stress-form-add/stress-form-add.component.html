@@ -1,41 +1,56 @@
-<div class="px-3 py-5 text-center">
-  <h1 class="mb-0">Add Stress Level</h1>
-</div>
-<ul class="list-group list-group-flush border-top border-bottom">
-  <li class="list-group-item">
-    <div class="row">
-      <div class="col-4">
-        <label class="col-form-label fw-bold">Date</label>
+<form [formGroup]="form" (submit)="submit()">
+  <div class="px-3 py-5 text-center">
+    <h1 class="mb-0">Add Stress Level</h1>
+  </div>
+  <ul class="list-group list-group-flush border-top border-bottom">
+    <li class="list-group-item">
+      <div class="row">
+        <div class="col-4">
+          <label class="col-form-label fw-bold">Date</label>
+        </div>
+        <div class="col-8">
+          <input type="datetime-local" class="form-control" formControlName="date">
+        </div>
       </div>
-      <div class="col-8">
-        <input type="datetime-local" class="form-control" [(ngModel)]="date">
+    </li>
+    <li class="list-group-item">
+      <div class="row">
+        <div class="col-4">
+          <label class="col-form-label fw-bold">Stress</label>
+        </div>
+        <div class="col-8">
+          <select class="form-select" formControlName="level">
+            <option *ngFor="let n of [0,10,20,30,40,50,60,70,80,90,100]" [ngValue]="n">{{ n }}</option>
+          </select>
+          <!--        <input type="number" class="form-control" min="0" max="100" step="10" [(ngModel)]="level">-->
+        </div>
       </div>
-    </div>
-  </li>
-  <li class="list-group-item">
-    <div class="row">
-      <div class="col-4">
-        <label class="col-form-label fw-bold">Stress Level</label>
+    </li>
+    <li class="list-group-item">
+      <div class="row">
+        <div class="col-4">
+          <label class="col-form-label fw-bold">Mood</label>
+        </div>
+        <div class="col-8">
+          <select class="form-select" formControlName="mood">
+            <option *ngFor="let n of [0,10,20,30,40,50,60,70,80,90,100]" [ngValue]="n">{{ n }}</option>
+          </select>
+          <!--        <input type="number" class="form-control" min="0" max="100" step="10" [(ngModel)]="level">-->
+        </div>
       </div>
-      <div class="col-8">
-        <select class="form-select" [(ngModel)]="level">
-          <option *ngFor="let n of [0,10,20,30,40,50,60,70,80,90,100]" [ngValue]="n">{{ n }}</option>
-        </select>
-<!--        <input type="number" class="form-control" min="0" max="100" step="10" [(ngModel)]="level">-->
+    </li>
+    <li class="list-group-item">
+      <div class="row">
+        <div class="col-4">
+          <label class="col-form-label fw-bold">Comment</label>
+        </div>
+        <div class="col-8">
+          <textarea class="form-control" rows="3" formControlName="comment"></textarea>
+        </div>
       </div>
-    </div>
-  </li>
-  <li class="list-group-item">
-    <div class="row">
-      <div class="col-4">
-        <label class="col-form-label fw-bold">Comment</label>
-      </div>
-      <div class="col-8">
-        <textarea class="form-control" rows="3" [(ngModel)]="comment"></textarea>
-      </div>
-    </div>
-  </li>
-</ul>
-<div class="d-grid p-3">
-  <button class="btn btn-primary" (click)="save()">Save</button>
-</div>
+    </li>
+  </ul>
+  <div class="d-grid p-3">
+    <button type="submit" class="btn btn-primary">Save</button>
+  </div>
+</form>

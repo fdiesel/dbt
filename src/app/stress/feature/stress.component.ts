@@ -34,14 +34,15 @@ export class StressComponent implements OnInit {
     this.chartOption$ = this.dataService.data$.pipe(
       map((data) => {
         return this.createChartOptions(
-          data.map(item => [item.date, item.level])
+          data.map(item => [item.date, item.level]),
+          data.map(item => [item.date, item.mood]),
         )
       })
     );
     this.dataService.update();
   }
 
-  createChartOptions(seriesData: [string, number][]): EChartsOption {
+  createChartOptions(stressData: [string, number][], moodData: [string, number][]): EChartsOption {
     return {
       xAxis: {
         type: 'time',
@@ -59,8 +60,13 @@ export class StressComponent implements OnInit {
       series: [
         {
           type: 'line',
-          data: seriesData,
-        },
+          color: 'red',
+          data: stressData,
+        }, {
+          type: 'line',
+          color: 'green',
+          data: moodData,
+        }
       ],
     }
   }
