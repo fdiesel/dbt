@@ -9,7 +9,10 @@
           <label class="col-form-label fw-bold">Date</label>
         </div>
         <div class="col-8">
-          <input type="datetime-local" class="form-control" formControlName="date">
+          <div class="d-grid gap-2">
+            <input type="datetime-local" class="form-control" formControlName="date">
+            <button type="button" class="btn btn-primary" (click)="now()">Now</button>
+          </div>
         </div>
       </div>
     </li>

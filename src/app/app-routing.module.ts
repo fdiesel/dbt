@@ -19,12 +19,6 @@ const routes: Routes = [
         (m) => m.SkillListModule
       )
   }, {
-    path: 'food',
-    loadChildren: () =>
-      import('./food/feature/food.module').then(
-        (m) => m.FoodModule
-      )
-  }, {
     path: 'settings',
     loadChildren: () =>
       import('./settings/feature/settings.module').then(

@@ -6,32 +6,14 @@
     <div class="container-fluid">
       <div echarts [options]="chartOption$ | async" style="max-height: 300px"></div>
     </div>
-<!--    <table class="table">-->
-<!--      <thead>-->
-<!--      <tr>-->
-<!--        <th scope="col">Time</th>-->
-<!--        <th scope="col">Stress</th>-->
-<!--        <th scope="col">Mood</th>-->
-<!--        <th scope="col">Comment</th>-->
-<!--      </tr>-->
-<!--      </thead>-->
-<!--      <tbody>-->
-<!--      <tr *ngFor="let item of data$ | async">-->
-<!--        <td class="font-monospace">{{ item.date | date:'HH:mm' }}</td>-->
-<!--        <td class="font-monospace text-center">{{ item.level }}%</td>-->
-<!--        <td class="font-monospace text-center">{{ item.mood }}%</td>-->
-<!--        <td>{{ item.comment }}</td>-->
-<!--      </tr>-->
-<!--      </tbody>-->
-<!--    </table>-->
     <ul class="list-group list-group-flush mb-5">
       <li class="list-group-item p-0">
         <div class="container-fluid p-0">
-          <div class="row g-0">
-            <div class="col-2 px-1 py-3 fw-bold">Time</div>
-            <div class="col-2 px-1 py-3 fw-bold">Stress</div>
-            <div class="col-2 px-1 py-3 fw-bold">Mood</div>
-            <div class="col-6 px-1 py-3 fw-bold">Comment</div>
+          <div class="row g-0 text-center">
+            <div class="col-2 py-3">Time</div>
+            <div class="col-2 py-3">Stress</div>
+            <div class="col-2 py-3">Mood</div>
+            <div class="col-6 py-3">Comment</div>
           </div>
         </div>
       </li>
