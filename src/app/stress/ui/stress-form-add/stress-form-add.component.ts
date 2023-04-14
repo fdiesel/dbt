@@ -11,7 +11,6 @@ export class StressFormAddComponent {
   }
 
   form = this.formBuilder.group({
-    date: [new Date(), [Validators.required]],
     level: [50, [Validators.required]],
     mood: [50, [Validators.required]],
     comment: ['']
@@ -23,15 +22,11 @@ export class StressFormAddComponent {
   submit(): void {
     if (this.form.valid) {
       this.onSave.emit({
-        date: this.form.value.date!.toISOString(),
+        date: new Date() .toISOString(),
         level: this.form.value.level!,
         mood: this.form.value.mood!,
         comment: this.form.value.comment!,
       });
     }
-  }
-
-  now(): void {
-    this.form.value.date = new Date();
   }
 }
