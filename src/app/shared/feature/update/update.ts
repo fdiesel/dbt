@@ -16,9 +16,9 @@ export class UpdateService {
   }
 
   private checkForUpdate(): void {
-    this.updates.checkForUpdate().then((isAvailable) => {
+    this.updates.checkForUpdate().then((isAvailable: boolean) => {
       if (isAvailable) {
-        this.showUpdatePrompt$.next(true);
+        this.update();
       }
     });
   }
